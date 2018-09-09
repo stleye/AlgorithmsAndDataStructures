@@ -33,7 +33,7 @@ struct LinkedList<Element> : Sequence, IteratorProtocol {
         return currentNode?.value
     }
 
-    mutating func insert(value: Element) {
+    mutating func insert(_ value: Element) {
         count = count + 1
         let newNode = LLNode<Element>()
         newNode.value = value
@@ -45,6 +45,27 @@ struct LinkedList<Element> : Sequence, IteratorProtocol {
         newNode.previous = lastNode
         lastNode?.next = newNode
         lastNode = newNode
+    }
+
+    mutating func insert(_ value: Element, at index: Int) {
+        if index == count {
+            insert(value)
+            return
+        }
+        let newNode = LLNode<Element>()
+        if index == 0 {
+            newNode.next = rootNode
+            rootNode?.previous = newNode
+            rootNode = newNode
+        } else {
+            let node = try! self.node(at: index)
+            newNode.next = node
+            newNode.previous = node.previous
+            node.previous?.next = newNode
+            node.previous = newNode
+        }
+        newNode.value = value
+        count = count + 1
     }
 
     mutating func remove(at index: Int) {
