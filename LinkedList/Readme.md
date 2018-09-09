@@ -20,6 +20,3 @@ ll.forEach { (e) in
     print (e)
 }
 ```
-# Stack
-
-# Queue
