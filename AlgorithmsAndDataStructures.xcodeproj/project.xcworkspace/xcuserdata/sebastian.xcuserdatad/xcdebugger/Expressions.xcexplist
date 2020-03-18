@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "Graph.doBFSForConnectedVertices(startingAt:_:):Algorithms.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.neighbors(of: vertex)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Graph.doForConnectedVerticesAux(startingAt:_:):DepthFirstSearch.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.neighbors(of: initialVertex)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Graph.doForConnectedVertices(startingAt:_:):DepthFirstSearch.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.vertices()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Graph.getComponents():Graph.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Graph.getComponents():Algorithms.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in Graph.getComponents():Graph.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Graph.markAllVerticesAs(visited:):DepthFirstSearch.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

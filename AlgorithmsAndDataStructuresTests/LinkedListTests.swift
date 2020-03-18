@@ -1,5 +1,5 @@
 import XCTest
-@testable import LinkedList
+@testable import AlgorithmsAndDataStructures
 
 class LinkedListTests: XCTestCase {
     
