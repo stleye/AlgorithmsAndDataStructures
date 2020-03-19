@@ -43,7 +43,7 @@ class GraphTests: XCTestCase {
         graph.addDirectedEdge(from: vertex5, to: vertex10)
         graph.addDirectedEdge(from: vertex10, to: vertex12)
         graph.addDirectedEdge(from: vertex12, to: vertex5)
-        let components = graph.getComponents()
+        let components = graph.components()
         XCTAssertEqual(components.count, 1)
         XCTAssert(components.first!.contains(vertex3))
         XCTAssert(components.first!.contains(vertex5))
@@ -68,7 +68,7 @@ class GraphTests: XCTestCase {
         graph.addDirectedEdge(from: vertex3, to: vertex5)
         graph.addDirectedEdge(from: vertex12, to: vertex10)
         graph.addDirectedEdge(from: vertex13, to: vertex5)
-        let components = graph.getComponents()
+        let components = graph.components()
         XCTAssertEqual(components.count, 2)
         let componentWith3 = components.first(where: { $0.contains(vertex3) })!
         let componentWith12 = components.first(where: { $0.contains(vertex12) })!
@@ -82,6 +82,60 @@ class GraphTests: XCTestCase {
         XCTAssertEqual(componentWith3.filter( { $0 == vertex13 }).count, 1)
         XCTAssertEqual(componentWith12.filter( { $0 == vertex10 }).count, 1)
         XCTAssertEqual(componentWith12.filter( { $0 == vertex12 }).count, 1)
+    }
+    
+    func testGraphWithoutPathShouldReturnNil() {
+        let graph = Graph<Int>()
+        let vertex1 = graph.createVertex(data: 1)
+        let vertex2 = graph.createVertex(data: 2)
+        let vertex3 = graph.createVertex(data: 3)
+        let vertex4 = graph.createVertex(data: 4)
+        let vertex5 = graph.createVertex(data: 5)
+        let vertex6 = graph.createVertex(data: 6)
+        let vertex7 = graph.createVertex(data: 7)
+        graph.addDirectedEdge(from: vertex1, to: vertex3)
+        graph.addDirectedEdge(from: vertex1, to: vertex4)
+        graph.addDirectedEdge(from: vertex4, to: vertex3)
+        graph.addDirectedEdge(from: vertex3, to: vertex2)
+        graph.addDirectedEdge(from: vertex4, to: vertex2)
+        graph.addDirectedEdge(from: vertex2, to: vertex5)
+        graph.addDirectedEdge(from: vertex2, to: vertex6)
+        graph.addDirectedEdge(from: vertex6, to: vertex5)
+        let path = graph.path(from: vertex1, to: vertex7)
+        XCTAssertNil(path)
+    }
+
+    func testGraphWithoutDirectedPathShouldReturnNil() {
+        let graph = Graph<Int>()
+        let vertex1 = graph.createVertex(data: 1)
+        let vertex2 = graph.createVertex(data: 2)
+        graph.addDirectedEdge(from: vertex1, to: vertex2)
+        let path = graph.path(from: vertex2, to: vertex1)
+        XCTAssertNil(path)
+    }
+
+    func testGraphPathShouldContainAllTheVertices() {
+        let graph = Graph<Int>()
+        let vertex1 = graph.createVertex(data: 1)
+        let vertex2 = graph.createVertex(data: 2)
+        let vertex3 = graph.createVertex(data: 3)
+        let vertex4 = graph.createVertex(data: 4)
+        let vertex5 = graph.createVertex(data: 5)
+        let vertex6 = graph.createVertex(data: 6)
+        graph.addDirectedEdge(from: vertex1, to: vertex3)
+        graph.addDirectedEdge(from: vertex1, to: vertex4)
+        graph.addDirectedEdge(from: vertex4, to: vertex3)
+        graph.addDirectedEdge(from: vertex3, to: vertex2)
+        graph.addDirectedEdge(from: vertex4, to: vertex2)
+        graph.addDirectedEdge(from: vertex2, to: vertex5)
+        graph.addDirectedEdge(from: vertex2, to: vertex6)
+        graph.addDirectedEdge(from: vertex6, to: vertex5)
+        let path = graph.path(from: vertex1, to: vertex5)
+        XCTAssertNotNil(path)
+        XCTAssert(path!.count >= 3)
+        for index in 0..<path!.count-1 {
+            XCTAssert(graph.neighbors(of: path![index]).contains(path![index+1]))
+        }
     }
 
 }

@@ -61,6 +61,12 @@ public class Graph<T: Hashable> {
             self.id = id
             self.userInfo = [:]
         }
+
+        func copy() -> Vertex {
+            let copy = Vertex(data: data, id: id)
+            copy.userInfo = self.userInfo
+            return copy
+        }
     }
 
     @discardableResult func createVertex(data: Element) -> Vertex {
@@ -127,9 +133,14 @@ public class Graph<T: Hashable> {
         return Array(adjacencyDict.keys)
     }
 
-    func neighbors(of vertex: Vertex) -> [Vertex] {
+    func neighbors(of vertex: Vertex, directedOnly: Bool = false) -> [Vertex] {
         var result: Set<Vertex> = []
-        let touchingVertices = self.edges().filter({ $0.source == vertex || $0.destination == vertex })
+        var touchingVertices: [Edge] = []
+        if directedOnly {
+            touchingVertices = self.edges(from: vertex)
+        } else {
+            touchingVertices = self.edges().filter({ $0.source == vertex || $0.destination == vertex })
+        }
         touchingVertices.forEach { (edge) in
             if edge.source != vertex {
                 result.insert(edge.source)

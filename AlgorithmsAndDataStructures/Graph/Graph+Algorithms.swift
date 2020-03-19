@@ -15,7 +15,23 @@ extension Graph {
         case bfs
     }
 
-    func getComponents() -> [[Vertex]] {
+    func path(from: Vertex, to destination: Vertex) -> [Vertex]? {
+        var result: [Vertex] = []
+        var stack = Stack<Vertex>()
+        var source = from.copy()
+        self.doForConnectedVertices(startingAt: &source, { vertex in
+            stack.push(vertex)
+        }, stopIf: { _ in
+            stack.top() == destination
+        }, directedOnly: true)
+        if stack.top() != destination { return nil }
+        while !stack.isEmpty() {
+            result.insert(stack.pop(), at: 0)
+        }
+        return result
+    }
+
+    func components() -> [[Vertex]] {
         var result: [[Vertex]] = []
         for var vertex in self.vertices() where !result.flatMap({ $0 }).contains(vertex)  {
             var component: [Vertex] = []
@@ -29,35 +45,51 @@ extension Graph {
 
     func doForConnectedVertices(algorithm: TraversalAlgorithm = .dfs,
                                 startingAt initialVertex: inout Vertex,
-                                _ block: (Vertex) -> Void) {
+                                _ body: (Vertex) -> Void,
+                                stopIf: (Vertex) -> Bool = { _ in false },
+                                directedOnly: Bool = false) {
         self.markAllVerticesAs(visited: false)
         switch algorithm {
         case .dfs:
-            self.doDFSForConnectedVertices(startingAt: &initialVertex, block)
+            var shouldStop = false
+            self.doDFSForConnectedVertices(startingAt: &initialVertex, body, stopIf, &shouldStop, directedOnly: directedOnly)
         case .bfs:
-            self.doBFSForConnectedVertices(startingAt: &initialVertex, block)
+            self.doBFSForConnectedVertices(startingAt: &initialVertex, body, stopIf, directedOnly: directedOnly)
         }
     }
 
     // Private
 
-    private func doDFSForConnectedVertices(startingAt initialVertex: inout Vertex, _ block: (Vertex) -> Void) {
+    private func doDFSForConnectedVertices(startingAt initialVertex: inout Vertex,
+                                           _ block: (Vertex) -> Void,
+                                           _ stopIf: (Vertex) -> Bool,
+                                           _ shouldStop: inout Bool,
+                                           directedOnly: Bool) {
         if initialVertex.visited { return }
         initialVertex.visited = true
         block(initialVertex)
-        for var neighbour in self.neighbors(of: initialVertex) {
-            self.doDFSForConnectedVertices(startingAt: &neighbour, block)
+        if stopIf(initialVertex) {
+            shouldStop = true
+            return
+        }
+        for var neighbour in self.neighbors(of: initialVertex, directedOnly: directedOnly) {
+            if shouldStop { break }
+            self.doDFSForConnectedVertices(startingAt: &neighbour, block, stopIf, &shouldStop, directedOnly: directedOnly)
         }
     }
 
-    private func doBFSForConnectedVertices(startingAt initialVertex: inout Vertex, _ block: (Vertex) -> Void) {
+    private func doBFSForConnectedVertices(startingAt initialVertex: inout Vertex,
+                                           _ block: (Vertex) -> Void,
+                                           _ stopIf: (Vertex) -> Bool,
+                                           directedOnly: Bool) {
         var queue = Queue<Vertex>()
         queue.enqueue(initialVertex)
         initialVertex.visited = true
         while !queue.isEmpty() {
             let vertex = queue.dequeue()
             block(vertex)
-            for neighbour in self.neighbors(of: vertex) {
+            if stopIf(vertex) { return }
+            for neighbour in self.neighbors(of: vertex, directedOnly: directedOnly) {
                 if !neighbour.visited {
                     neighbour.visited = true
                     queue.enqueue(neighbour)
