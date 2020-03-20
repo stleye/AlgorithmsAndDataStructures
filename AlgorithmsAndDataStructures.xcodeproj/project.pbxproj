@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E6D4034242581BF00D35FF1 /* FiniteStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6D4024242581BF00D35FF1 /* FiniteStateMachine.swift */; };
+		9E6D40372425821700D35FF1 /* BinaryHeap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6D40362425821700D35FF1 /* BinaryHeap.swift */; };
+		9E6D403A2425826500D35FF1 /* FiniteStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6D40392425826500D35FF1 /* FiniteStateMachineTests.swift */; };
 		9EEFF97F24224147005B68AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEFF97E24224147005B68AB /* AppDelegate.swift */; };
 		9EEFF98124224147005B68AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEFF98024224147005B68AB /* SceneDelegate.swift */; };
 		9EEFF98324224147005B68AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEFF98224224147005B68AB /* ViewController.swift */; };
@@ -40,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E6D4024242581BF00D35FF1 /* FiniteStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiniteStateMachine.swift; sourceTree = "<group>"; };
+		9E6D40362425821700D35FF1 /* BinaryHeap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryHeap.swift; sourceTree = "<group>"; };
+		9E6D40392425826500D35FF1 /* FiniteStateMachineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiniteStateMachineTests.swift; sourceTree = "<group>"; };
 		9EEFF97B24224147005B68AB /* AlgorithmsAndDataStructures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlgorithmsAndDataStructures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EEFF97E24224147005B68AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EEFF98024224147005B68AB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +89,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E6D4012242581BF00D35FF1 /* FiniteStateMachine */ = {
+			isa = PBXGroup;
+			children = (
+				9E6D4024242581BF00D35FF1 /* FiniteStateMachine.swift */,
+			);
+			path = FiniteStateMachine;
+			sourceTree = "<group>";
+		};
+		9E6D4035242581D700D35FF1 /* Sorting Algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				9EEFF9C024224193005B68AB /* BubbleSort */,
+				9EEFF9C224224193005B68AB /* HeapSort */,
+				9EEFF9BC24224193005B68AB /* InsertionSort */,
+				9EEFF9A624224192005B68AB /* LinkedList */,
+				9EEFF9C424224193005B68AB /* MergeSort */,
+				9EEFF9A224224192005B68AB /* QuickSort */,
+				9EEFF9A424224192005B68AB /* SelectionSort */,
+			);
+			path = "Sorting Algorithms";
+			sourceTree = "<group>";
+		};
+		9E6D40382425822800D35FF1 /* BinaryHeap */ = {
+			isa = PBXGroup;
+			children = (
+				9E6D40362425821700D35FF1 /* BinaryHeap.swift */,
+			);
+			path = BinaryHeap;
+			sourceTree = "<group>";
+		};
 		9EEFF97224224147005B68AB = {
 			isa = PBXGroup;
 			children = (
@@ -105,15 +141,11 @@
 			isa = PBXGroup;
 			children = (
 				9EEFF98C2422414A005B68AB /* Info.plist */,
-				9EEFF9C024224193005B68AB /* BubbleSort */,
+				9E6D40382425822800D35FF1 /* BinaryHeap */,
+				9E6D4012242581BF00D35FF1 /* FiniteStateMachine */,
 				9EEFF9BE24224193005B68AB /* Graph */,
-				9EEFF9C224224193005B68AB /* HeapSort */,
-				9EEFF9BC24224193005B68AB /* InsertionSort */,
-				9EEFF9A624224192005B68AB /* LinkedList */,
-				9EEFF9C424224193005B68AB /* MergeSort */,
 				9EEFF9C624224193005B68AB /* Queue */,
-				9EEFF9A224224192005B68AB /* QuickSort */,
-				9EEFF9A424224192005B68AB /* SelectionSort */,
+				9E6D4035242581D700D35FF1 /* Sorting Algorithms */,
 				9EEFF9C824224193005B68AB /* Stack */,
 				9EEFF9A024224175005B68AB /* Supporting Files */,
 				9EEFF9A124224180005B68AB /* ViewControllers */,
@@ -124,6 +156,7 @@
 		9EEFF9942422414A005B68AB /* AlgorithmsAndDataStructuresTests */ = {
 			isa = PBXGroup;
 			children = (
+				9E6D40392425826500D35FF1 /* FiniteStateMachineTests.swift */,
 				9EEFF9952422414A005B68AB /* GraphTests.swift */,
 				9EEFF9DB242241F6005B68AB /* LinkedListTests.swift */,
 				9EEFF9972422414A005B68AB /* Info.plist */,
@@ -342,10 +375,12 @@
 				9EEFF97F24224147005B68AB /* AppDelegate.swift in Sources */,
 				9EEFF98124224147005B68AB /* SceneDelegate.swift in Sources */,
 				9EEFF9DF24224B75005B68AB /* Graph+Algorithms.swift in Sources */,
+				9E6D4034242581BF00D35FF1 /* FiniteStateMachine.swift in Sources */,
 				9EEFF9D524224193005B68AB /* Graph.swift in Sources */,
 				9EEFF9CA24224193005B68AB /* QuickSort.swift in Sources */,
 				9EEFF9D724224193005B68AB /* HeapSort.swift in Sources */,
 				9EEFF9D224224193005B68AB /* LinkedList.swift in Sources */,
+				9E6D40372425821700D35FF1 /* BinaryHeap.swift in Sources */,
 				9EEFF9CB24224193005B68AB /* SelectionSort.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E6D403A2425826500D35FF1 /* FiniteStateMachineTests.swift in Sources */,
 				9EEFF9DD24224222005B68AB /* LinkedList.swift in Sources */,
 				9EEFF9DC242241F6005B68AB /* LinkedListTests.swift in Sources */,
 				9EEFF9962422414A005B68AB /* GraphTests.swift in Sources */,

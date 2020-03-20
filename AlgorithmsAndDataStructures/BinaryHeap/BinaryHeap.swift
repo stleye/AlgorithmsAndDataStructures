@@ -1,15 +1,12 @@
-extension Array where Element : Comparable {
+//
+//  BinaryHeap.swift
+//  AlgorithmsAndDataStructures
+//
+//  Created by Sebastian Tleye on 20/03/2020.
+//  Copyright © 2020 HumileAnts. All rights reserved.
+//
 
-    mutating func heapSort(by areInIncreasingOrder: @escaping (Element, Element) -> Bool) {
-        let heap = BinaryHeap(from: self, by: areInIncreasingOrder)
-        var index = 0
-        while heap.size() > 0 {
-            self[index] = heap.extractTop()!
-            index = index + 1
-        }
-    }
-
-}
+import Foundation
 
 class BinaryHeap<T: Comparable> {
 

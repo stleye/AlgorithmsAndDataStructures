@@ -3,12 +3,26 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "Graph.doBFSForConnectedVertices(startingAt:_:):Algorithms.swift">
+         contextName = "Graph.doForConnectedVertices(startingAt:_:):DepthFirstSearch.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.neighbors(of: vertex)">
+               value = "self.vertices()">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in Graph.path(from:to:):Graph+Algorithms.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "from">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Graph.markAllVerticesAs(visited:):DepthFirstSearch.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Graph.path(from:to:):Graph+Algorithms.swift">
       </ContextState>
       <ContextState
          contextName = "Graph.doForConnectedVerticesAux(startingAt:_:):DepthFirstSearch.swift">
@@ -19,15 +33,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Graph.doForConnectedVertices(startingAt:_:):DepthFirstSearch.swift">
+         contextName = "Graph.doBFSForConnectedVertices(startingAt:_:):Algorithms.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.vertices()">
+               value = "self.neighbors(of: vertex)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "Graph.doDFSForConnectedVertices(startingAt:_:_:):Graph+Algorithms.swift">
+      </ContextState>
+      <ContextState
          contextName = "Graph.getComponents():Graph.swift">
+      </ContextState>
+      <ContextState
+         contextName = "GraphTests.testGraphPathShouldContainAllTheVertices():GraphTests.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "graph.neighbors(of: path![index])">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "Graph.getComponents():Algorithms.swift">
@@ -36,7 +61,7 @@
          contextName = "closure #2 in Graph.getComponents():Graph.swift">
       </ContextState>
       <ContextState
-         contextName = "Graph.markAllVerticesAs(visited:):DepthFirstSearch.swift">
+         contextName = "GraphTests.testGraphWithoutDirectedPathShouldReturnNil():GraphTests.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
