@@ -107,7 +107,7 @@
 				9E6D40742425966000D35FF1 /* FiniteStateMachine */,
 				9E6D40892425966000D35FF1 /* Graph */,
 				9E6D405F2425966000D35FF1 /* Queue */,
-				9E6D40612425966000D35FF1 /* Sorting Algorithms */,
+				9E6D40612425966000D35FF1 /* SortingAlgorithms */,
 				9E6D40722425966000D35FF1 /* Stack */,
 			);
 			path = AlgorithmsAndDataStructures;
@@ -132,7 +132,7 @@
 			path = Queue;
 			sourceTree = "<group>";
 		};
-		9E6D40612425966000D35FF1 /* Sorting Algorithms */ = {
+		9E6D40612425966000D35FF1 /* SortingAlgorithms */ = {
 			isa = PBXGroup;
 			children = (
 				9E6D40622425966000D35FF1 /* InsertionSort */,
@@ -143,7 +143,7 @@
 				9E6D406E2425966000D35FF1 /* QuickSort */,
 				9E6D40702425966000D35FF1 /* MergeSort */,
 			);
-			path = "Sorting Algorithms";
+			path = SortingAlgorithms;
 			sourceTree = "<group>";
 		};
 		9E6D40622425966000D35FF1 /* InsertionSort */ = {
