@@ -3,6 +3,7 @@ Pod::Spec.new do |spec|
   spec.version      = "0.0.1"
   spec.summary      = "A short description of AlgorithmsAndDataStructures."
   spec.description  = <<-DESC
+                   This SDK implements some algorithms and data structures
                    DESC
   spec.homepage     = "https://github.com/stleye/humileants-specs"
   spec.license      = { :type => "MIT" }

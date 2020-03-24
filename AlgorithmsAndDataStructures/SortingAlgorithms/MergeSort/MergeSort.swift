@@ -1,6 +1,6 @@
 extension Array where Element : Comparable {
 
-    mutating func mergeSort(by areInIncreasingOrder: @escaping (Element, Element) -> Bool) {
+    mutating public func mergeSort(by areInIncreasingOrder: @escaping (Element, Element) -> Bool) {
         if self.count <= 1 { return }
         mergeSortAux(0, self.count-1, areInIncreasingOrder)
     }
@@ -14,8 +14,8 @@ extension Array where Element : Comparable {
     }
 
     private mutating func merge(_ leftIndex: Int, _ middleIndex: Int, _ rightIndex: Int, _ areInIncreasingOrder: @escaping (Element, Element) -> Bool) {
-        var leftArray = Array(self[leftIndex...middleIndex])
-        var rightArray = Array(self[middleIndex+1...rightIndex])
+        let leftArray = Array(self[leftIndex...middleIndex])
+        let rightArray = Array(self[middleIndex+1...rightIndex])
         var i = 0
         var j = 0
         var k = leftIndex

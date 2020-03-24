@@ -1,25 +1,29 @@
-struct Stack<T> {
-    var count: Int {
+public struct Stack<T> {
+
+    public var count: Int {
         return list.count
     }
 
     private var list = LinkedList<T>()
 
-    mutating func push(_ value: T) {
+    public init() {}
+
+    mutating public func push(_ value: T) {
         list.insert(value)
     }
 
-    @discardableResult mutating func pop() -> T {
+    @discardableResult
+    public mutating func pop() -> T {
         let result = list.last
         list.remove(at: list.count - 1)
         return result!
     }
 
-    func top() -> T? {
+    public func top() -> T? {
         return list.last
     }
 
-    func isEmpty() -> Bool {
+    public func isEmpty() -> Bool {
         return list.count == 0
     }
 }

@@ -1,12 +1,14 @@
-struct LinkedList<Element> : Sequence, IteratorProtocol {
+public struct LinkedList<Element> : Sequence, IteratorProtocol {
 
-    enum LinkedListError: Error {
+    public enum LinkedListError: Error {
         case IndexOutOfRange
     }
+    
+    public init() {}
 
-    var count = 0
+    private(set) var count = 0
 
-    var last: Element? {
+    public var last: Element? {
         return self.lastNode?.value
     }
 
@@ -20,11 +22,11 @@ struct LinkedList<Element> : Sequence, IteratorProtocol {
     private var lastNode: LLNode<Element>? = nil
     private var currentNode: LLNode<Element>? = nil
 
-    subscript(index: Int) -> Element {
+    public subscript(index: Int) -> Element {
         return try! value(at: index)
     }
 
-    mutating func next() -> Element? {
+    mutating public func next() -> Element? {
         if currentNode == nil {
             currentNode = rootNode
         } else {
@@ -33,7 +35,7 @@ struct LinkedList<Element> : Sequence, IteratorProtocol {
         return currentNode?.value
     }
 
-    mutating func insert(_ value: Element) {
+    mutating public func insert(_ value: Element) {
         count = count + 1
         let newNode = LLNode<Element>()
         newNode.value = value
@@ -47,7 +49,7 @@ struct LinkedList<Element> : Sequence, IteratorProtocol {
         lastNode = newNode
     }
 
-    mutating func insert(_ value: Element, at index: Int) {
+    mutating public func insert(_ value: Element, at index: Int) {
         if index == count {
             insert(value)
             return
@@ -68,7 +70,7 @@ struct LinkedList<Element> : Sequence, IteratorProtocol {
         count = count + 1
     }
 
-    mutating func remove(at index: Int) {
+    mutating public func remove(at index: Int) {
         let node = try! self.node(at: index)
         if count == 1 {
             rootNode = nil

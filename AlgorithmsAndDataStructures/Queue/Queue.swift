@@ -1,25 +1,29 @@
-struct Queue<T> {
-    var count: Int {
+public struct Queue<T> {
+    
+    public var count: Int {
         return list.count
     }
 
     private var list = LinkedList<T>()
 
-    mutating func enqueue(_ value: T) {
+    public init() {}
+
+    public mutating func enqueue(_ value: T) {
         list.insert(value, at: 0)
     }
 
-    @discardableResult mutating func dequeue() -> T {
+    @discardableResult
+    public mutating func dequeue() -> T {
         let result = list.last
         list.remove(at: list.count - 1)
         return result!
     }
 
-    func isEmpty() -> Bool {
+    public func isEmpty() -> Bool {
         return list.count == 0
     }
 
-    func front() -> T? {
+    public func front() -> T? {
         return list.last
     }
 }

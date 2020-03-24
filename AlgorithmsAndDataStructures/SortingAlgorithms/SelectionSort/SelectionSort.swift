@@ -1,6 +1,6 @@
 extension Array where Element : Comparable {
 
-    mutating func selectionSort(by areInIncreasingOrder: @escaping (Element, Element) -> Bool) {
+    mutating public func selectionSort(by areInIncreasingOrder: @escaping (Element, Element) -> Bool) {
         if self.count <= 1 { return }
         for i in 0..<self.count-1 {
             var minIndex = i

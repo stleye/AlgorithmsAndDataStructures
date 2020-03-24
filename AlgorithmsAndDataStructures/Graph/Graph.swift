@@ -11,8 +11,10 @@ import Foundation
 public class Graph<T: Hashable> {
 
     public typealias Element = T
+    
+    public init() {}
 
-    var description: CustomStringConvertible {
+    public var description: CustomStringConvertible {
         var result = ""
         for (vertex, edges) in adjacencyDict {
             var edgeString = ""
@@ -31,9 +33,9 @@ public class Graph<T: Hashable> {
     private var adjacencyDict: [Vertex: [Edge]] = [:]
     private var lastId = 0
 
-    class Edge {
+    public class Edge {
 
-        enum EdgeType {
+        public enum EdgeType {
             case directed, undirected
         }
 
@@ -42,7 +44,7 @@ public class Graph<T: Hashable> {
         public var type: EdgeType
         public var weight: Double?
 
-        init(source: Vertex, destination: Vertex, type: EdgeType, weight: Double? = nil) {
+        public init(source: Vertex, destination: Vertex, type: EdgeType, weight: Double? = nil) {
             self.type = type
             self.source = source
             self.destination = destination
@@ -50,8 +52,8 @@ public class Graph<T: Hashable> {
         }
     }
 
-    class Vertex {
-        var data: T
+    public class Vertex {
+        public var data: T
         var userInfo: [String: Any]
 
         fileprivate var id: Int
@@ -62,14 +64,15 @@ public class Graph<T: Hashable> {
             self.userInfo = [:]
         }
 
-        func copy() -> Vertex {
+        public func copy() -> Vertex {
             let copy = Vertex(data: data, id: id)
             copy.userInfo = self.userInfo
             return copy
         }
     }
 
-    @discardableResult func createVertex(data: Element) -> Vertex {
+    @discardableResult
+    public func createVertex(data: Element) -> Vertex {
         self.lastId = self.lastId + 1
         let vertex = Vertex(data: data, id: lastId)
         if adjacencyDict[vertex] == nil {
@@ -78,19 +81,19 @@ public class Graph<T: Hashable> {
         return vertex
     }
 
-    func addDirectedEdge(from source: Vertex, to destination: Vertex, weight: Double? = nil) {
+    public func addDirectedEdge(from source: Vertex, to destination: Vertex, weight: Double? = nil) {
         let edge = Edge(source: source, destination: destination, type: .directed, weight: weight)
         adjacencyDict[source]?.append(edge)
     }
 
-    func addUndirectedEdge(vertices: (Vertex, Vertex), weight: Double? = nil) {
+    public func addUndirectedEdge(vertices: (Vertex, Vertex), weight: Double? = nil) {
         let (source, destination) = vertices
         let edge = Edge(source: source, destination: destination, type: .undirected, weight: weight)
         adjacencyDict[source]?.append(edge)
         adjacencyDict[destination]?.append(edge)
     }
 
-    func add(_ type: Edge.EdgeType, from source: Vertex, to destination: Vertex, weight: Double? = nil) {
+    public func add(_ type: Edge.EdgeType, from source: Vertex, to destination: Vertex, weight: Double? = nil) {
         switch type {
         case .directed:
             addDirectedEdge(from: source, to: destination, weight: weight)
@@ -99,7 +102,7 @@ public class Graph<T: Hashable> {
         }
     }
 
-    func weight(from source: Vertex, to destination: Vertex) -> Double? {
+    public func weight(from source: Vertex, to destination: Vertex) -> Double? {
         guard let edges = adjacencyDict[source] else {
             return nil
         }
@@ -111,15 +114,15 @@ public class Graph<T: Hashable> {
         return nil
     }
 
-    func edges(from source: Vertex) -> [Edge] {
+    public func edges(from source: Vertex) -> [Edge] {
         return adjacencyDict[source] ?? []
     }
 
-    func edges(to destination: Vertex) -> [Edge] {
+    public func edges(to destination: Vertex) -> [Edge] {
         return self.edges().filter({ $0.destination == destination })
     }
 
-    func edges() -> [Edge] {
+    public func edges() -> [Edge] {
         var result: Set<Edge> = []
         for vertex in self.vertices() {
             for edge in self.edges(from: vertex) {
@@ -129,11 +132,11 @@ public class Graph<T: Hashable> {
         return Array(result)
     }
 
-    func vertices() -> [Vertex] {
+    public func vertices() -> [Vertex] {
         return Array(adjacencyDict.keys)
     }
 
-    func neighbors(of vertex: Vertex, directedOnly: Bool = false) -> [Vertex] {
+    public func neighbors(of vertex: Vertex, directedOnly: Bool = false) -> [Vertex] {
         var result: Set<Vertex> = []
         var touchingVertices: [Edge] = []
         if directedOnly {
@@ -156,7 +159,7 @@ public class Graph<T: Hashable> {
 
 extension Graph.Edge: Hashable {
 
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         return hasher.combine("\(source)\(destination)\(String(describing: weight))")
     }
 
@@ -170,7 +173,7 @@ extension Graph.Edge: Hashable {
 
 extension Graph.Vertex: Hashable, CustomStringConvertible {
 
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         return hasher.combine("\(data)\(id)")
     }
 

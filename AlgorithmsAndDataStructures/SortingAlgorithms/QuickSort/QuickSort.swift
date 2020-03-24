@@ -1,6 +1,6 @@
 extension Array where Element : Comparable {
 
-    mutating func quickSort(by areInIncreasingOrder: @escaping (Element, Element) -> Bool) {
+    mutating public func quickSort(by areInIncreasingOrder: @escaping (Element, Element) -> Bool) {
         if self.count <= 1 { return }
         quickSortAux(0, self.count-1, areInIncreasingOrder)
     }

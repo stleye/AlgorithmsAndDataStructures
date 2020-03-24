@@ -1,6 +1,6 @@
 extension Array where Element : Comparable {
 
-    mutating func insertionSort(by areInIncreasingOrder: @escaping (Element, Element) -> Bool) {
+    mutating public func insertionSort(by areInIncreasingOrder: @escaping (Element, Element) -> Bool) {
         if self.count <= 1 { return }
         for i in 1..<self.count {
             for j in stride(from: i, through: 1, by: -1) {

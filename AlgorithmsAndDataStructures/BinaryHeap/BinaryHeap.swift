@@ -8,24 +8,24 @@
 
 import Foundation
 
-class BinaryHeap<T: Comparable> {
+public class BinaryHeap<T: Comparable> {
 
     private var elements: [T] = []
     private var areInIncreasingOrder: (T, T) -> Bool
 
-    init(ofType: T.Type, by areInIncreasingOrder: @escaping (T, T) -> Bool) {
+    public init(ofType: T.Type, by areInIncreasingOrder: @escaping (T, T) -> Bool) {
         self.elements = []
         self.areInIncreasingOrder = areInIncreasingOrder
     }
 
-    init(from array: [T], by areInIncreasingOrder: @escaping (T, T) -> Bool) {
+    public init(from array: [T], by areInIncreasingOrder: @escaping (T, T) -> Bool) {
         self.areInIncreasingOrder = areInIncreasingOrder
         for elem in array {
             insert(elem)
         }
     }
 
-    func insert(_ element: T) {
+    public func insert(_ element: T) {
         elements.append(element)
         var elementIndex = elements.count - 1
         while true {
@@ -39,7 +39,7 @@ class BinaryHeap<T: Comparable> {
         }
     }
 
-    func removeTop() {
+    public func removeTop() {
         if elements.count <= 0 { return }
         var parentIndex = 0
         elements[parentIndex] = elements.last!
@@ -59,15 +59,15 @@ class BinaryHeap<T: Comparable> {
         }
     }
 
-    func size() -> Int {
+    public func size() -> Int {
         return elements.count
     }
 
-    func top() -> T? {
+    public func top() -> T? {
         return elements.first
     }
 
-    func extractTop() -> T? {
+    public func extractTop() -> T? {
         let res = elements.first
         removeTop()
         return res

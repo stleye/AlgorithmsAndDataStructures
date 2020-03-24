@@ -20,7 +20,7 @@ public class FiniteStateMachine: NSObject {
     private var transitions: [Transition]
     private var transitionTimer: Timer?
 
-    init(initialState: State, transitions: [Transition], variables: Variables = Variables()) {
+    public init(initialState: State, transitions: [Transition], variables: Variables = Variables()) {
         self.initialState = initialState
         self.states = [initialState]
         self.symbols = []
@@ -36,7 +36,7 @@ public class FiniteStateMachine: NSObject {
         self.variables.fsm = self
     }
 
-    func receive(input: Symbol) {
+    public func receive(input: Symbol) {
         for transition in transitions {
             if transition.origin == self.currentState && transition.input == input && transition.condition(self) {
                 self.currentState = transition.destination
@@ -47,7 +47,7 @@ public class FiniteStateMachine: NSObject {
         }
     }
 
-    func composeInParallel(with fsm: FiniteStateMachine) -> FiniteStateMachine {
+    public func composeInParallel(with fsm: FiniteStateMachine) -> FiniteStateMachine {
         let initialState = State(state1: self.initialState, state2: fsm.initialState)
         var transitions: [Transition] = []
         for transitionSelf in self.transitions {
@@ -127,41 +127,41 @@ extension FiniteStateMachine {
     public typealias Symbol = Int
     typealias Event = (Transition) -> Void
 
-    class State: Hashable {
+    public class State: Hashable {
 
-        struct Condition {
+        public struct Condition {
 
             private var condition: ((Variables) -> Bool)
 
-            static func createFrom(_ condition1: Condition?, and condition2: Condition?) -> Condition {
+            public static func createFrom(_ condition1: Condition?, and condition2: Condition?) -> Condition {
                 return Condition(condition: { variables in
                     (condition1?.isSatisfied(variables) ?? true) && (condition2?.isSatisfied(variables) ?? true)
                 })
             }
 
-            static func allwaysTrue() -> Condition {
+            public static func allwaysTrue() -> Condition {
                 return Condition { (variables) -> Bool in return true }
             }
 
-            static func timer(_ name: String, is comparator: @escaping (Int, Int) -> Bool, than value: Int) -> Condition {
+            public static func timer(_ name: String, is comparator: @escaping (Int, Int) -> Bool, than value: Int) -> Condition {
                 return Condition(condition: { variables in comparator(variables.timerValueFor(name), value) })
             }
 
-            static func variable<T: Comparable>(_ name: String, is comparator: @escaping (T, T) -> Bool, than value: T) -> Condition {
+            public static func variable<T: Comparable>(_ name: String, is comparator: @escaping (T, T) -> Bool, than value: T) -> Condition {
                 return Condition(condition: { variables in comparator(variables.valueFor(name) as! T, value) })
             }
 
-            func isSatisfied(_ variables: Variables) -> Bool {
+            public func isSatisfied(_ variables: Variables) -> Bool {
                 return self.condition(variables)
             }
 
         }
 
-        func hash(into hasher: inout Hasher) {
+        public func hash(into hasher: inout Hasher) {
             hasher.combine(id)
         }
 
-        static func == (lhs: FiniteStateMachine.State, rhs: FiniteStateMachine.State) -> Bool {
+        public static func == (lhs: FiniteStateMachine.State, rhs: FiniteStateMachine.State) -> Bool {
             return lhs.id == rhs.id && lhs.state1 == rhs.state1 && lhs.state2 == rhs.state2
         }
 
@@ -172,21 +172,21 @@ extension FiniteStateMachine {
         private var state1: State?
         private var state2: State?
 
-        init(_ id: String, _ name: String, condition: Condition? = nil) {
+        public init(_ id: String, _ name: String, condition: Condition? = nil) {
             self.id = id
             self.name = name
             self.condition = condition
         }
 
-        convenience init(_ id: String) {
+        public convenience init(_ id: String) {
             self.init(id, id, condition: nil)
         }
 
-        convenience init(_ id: String, condition: Condition?) {
+        public convenience init(_ id: String, condition: Condition?) {
             self.init(id, id, condition: condition)
         }
 
-        convenience init(state1: State, state2: State) {
+        public convenience init(state1: State, state2: State) {
             let condition = Condition.createFrom(state1.condition, and: state2.condition)
             let newId = state1.id + ", " + state2.id
             let newName = state1.name + ", " + state2.name
@@ -195,7 +195,7 @@ extension FiniteStateMachine {
             self.state2 = state2
         }
 
-        func contains(_ state: State) -> Bool {
+        public func contains(_ state: State) -> Bool {
             if self.state1 == nil && self.state2 == nil { return false }
             if self.state1 == state { return true }
             if self.state2 == state { return true }
@@ -203,25 +203,25 @@ extension FiniteStateMachine {
         }
     }
 
-    struct Transition: Hashable {
+    public struct Transition: Hashable {
 
-        func hash(into hasher: inout Hasher) {
+        public func hash(into hasher: inout Hasher) {
             hasher.combine(origin)
             hasher.combine(input)
             hasher.combine(destination)
         }
 
-        static func == (lhs: FiniteStateMachine.Transition, rhs: FiniteStateMachine.Transition) -> Bool {
+        public static func == (lhs: FiniteStateMachine.Transition, rhs: FiniteStateMachine.Transition) -> Bool {
             return lhs.origin == rhs.origin && lhs.input == rhs.input && lhs.destination == rhs.destination
         }
 
-        var origin: State
-        var input: Symbol
-        var destination: State
-        var condition: ((FiniteStateMachine) -> Bool)
-        var action: ((FiniteStateMachine) -> Void)
+        public var origin: State
+        public var input: Symbol
+        public var destination: State
+        public var condition: ((FiniteStateMachine) -> Bool)
+        public var action: ((FiniteStateMachine) -> Void)
 
-        init(from origin: State,
+        public init(from origin: State,
              to destination: State,
              through input: Symbol,
              condition: @escaping ((FiniteStateMachine) -> Bool) = { _ in true },
@@ -233,7 +233,7 @@ extension FiniteStateMachine {
             self.action = action
         }
 
-        init(_ from: String,
+        public init(_ from: String,
              _ to: String,
              _ through: Symbol,
              condition: @escaping ((FiniteStateMachine) -> Bool) = { _ in true },
@@ -242,7 +242,7 @@ extension FiniteStateMachine {
         }
     }
 
-    class Variables {
+    public class Variables {
 
         weak var fsm: FiniteStateMachine?
         
@@ -250,42 +250,34 @@ extension FiniteStateMachine {
         private var variables: [String: Any] = [:]
         private var timer: Timer?
 
-        init(_ values: (String, Any)...) {
+        public init(_ values: (String, Any)...) {
             for value in values {
                 self.variables[value.0] = value.1
             }
         }
 
-        func valueFor(_ name: String) -> Any? {
+        public func valueFor(_ name: String) -> Any? {
             return self.variables[name]
         }
 
-        func intValueFor(_ name: String) -> Int {
+        public func intValueFor(_ name: String) -> Int {
             return self.valueFor(name) as! Int
         }
 
-        func stringValueFor(_ name: String) -> String {
+        public func stringValueFor(_ name: String) -> String {
             return self.valueFor(name) as! String
         }
 
-        func timerValueFor(_ name: String) -> Int {
+        public func timerValueFor(_ name: String) -> Int {
             return self.timers[name]!
         }
 
-        func set(value: Any, to name: String) {
+        public func set(value: Any, to name: String) {
             self.variables[name] = value
             fsm?.checkCurrentStateCondition()
         }
 
-        func merge(with variables: Variables) -> Variables {
-            let result: Variables = variables
-            for (name, value) in self.variables {
-                result.set(value: value, to: name)
-            }
-            return result
-        }
-
-        func resetTimer(_ name: String) {
+        public func resetTimer(_ name: String) {
             if timer == nil {
                 timer = Timer.scheduledTimer(timeInterval: 1.0,
                                              target: self,
@@ -294,6 +286,14 @@ extension FiniteStateMachine {
                                              repeats: true)
             }
             timers[name] = 0
+        }
+
+        fileprivate func merge(with variables: Variables) -> Variables {
+            let result: Variables = variables
+            for (name, value) in self.variables {
+                result.set(value: value, to: name)
+            }
+            return result
         }
 
         @objc private func incrementTimeOneSecond() {

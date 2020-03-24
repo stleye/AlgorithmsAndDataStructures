@@ -10,12 +10,12 @@ import Foundation
 
 extension Graph {
 
-    enum TraversalAlgorithm {
+    public enum TraversalAlgorithm {
         case dfs
         case bfs
     }
 
-    func path(from: Vertex, to destination: Vertex) -> [Vertex]? {
+    public func path(from: Vertex, to destination: Vertex) -> [Vertex]? {
         var result: [Vertex] = []
         var stack = Stack<Vertex>()
         var source = from.copy()
@@ -31,7 +31,7 @@ extension Graph {
         return result
     }
 
-    func components() -> [[Vertex]] {
+    public func components() -> [[Vertex]] {
         var result: [[Vertex]] = []
         for var vertex in self.vertices() where !result.flatMap({ $0 }).contains(vertex)  {
             var component: [Vertex] = []
@@ -43,7 +43,7 @@ extension Graph {
         return result
     }
 
-    func doForConnectedVertices(algorithm: TraversalAlgorithm = .dfs,
+    public func doForConnectedVertices(algorithm: TraversalAlgorithm = .dfs,
                                 startingAt initialVertex: inout Vertex,
                                 _ body: (Vertex) -> Void,
                                 stopIf: (Vertex) -> Bool = { _ in false },
