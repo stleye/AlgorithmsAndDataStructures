@@ -9,31 +9,38 @@
 import Foundation
 
 public class Graph<T: Hashable> {
-
-    public typealias Element = T
     
-    public init() {}
+    public enum GraphRepresentationType {
+        case adjacencyList
+        case matrix
+    }
+
+    public init(graphRepresentation: GraphRepresentationType = .matrix) {
+        switch graphRepresentation {
+        case .adjacencyList:
+            self.graphRepresentation = AdjacencyList<T>()
+        case .matrix:
+            self.graphRepresentation = AdjacencMatrix<T>()
+        }
+    }
 
     public var description: CustomStringConvertible {
         var result = ""
-        for (vertex, edges) in adjacencyDict {
+        for vertex in self.vertices() {
             var edgeString = ""
-            for (index, edge) in edges.enumerated() {
-                if index != edges.count - 1 {
-                    edgeString.append("\(edge.destination), ")
-                } else {
-                    edgeString.append("\(edge.destination)")
-                }
+            for edge in self.edges(from: vertex) {
+                edgeString.append("\(edge.destination), ")
             }
             result.append("\(vertex) ---> [ \(edgeString) ] \n ")
         }
         return result
     }
 
-    private var adjacencyDict: [Vertex: [Edge]] = [:]
-    private var lastId = 0
+    private var graphRepresentation: GraphRepresentation<T>
 
     public class Edge {
+        
+        public typealias Weight = Double
 
         public enum EdgeType {
             case directed, undirected
@@ -42,9 +49,9 @@ public class Graph<T: Hashable> {
         public var source: Vertex
         public var destination: Vertex
         public var type: EdgeType
-        public var weight: Double?
+        public var weight: Weight?
 
-        public init(source: Vertex, destination: Vertex, type: EdgeType, weight: Double? = nil) {
+        public init(source: Vertex, destination: Vertex, type: EdgeType, weight: Weight? = nil) {
             self.type = type
             self.source = source
             self.destination = destination
@@ -58,7 +65,7 @@ public class Graph<T: Hashable> {
 
         fileprivate var id: Int
 
-        fileprivate init(data: T, id: Int) {
+        init(data: T, id: Int) {
             self.data = data
             self.id = id
             self.userInfo = [:]
@@ -72,25 +79,16 @@ public class Graph<T: Hashable> {
     }
 
     @discardableResult
-    public func createVertex(data: Element) -> Vertex {
-        self.lastId = self.lastId + 1
-        let vertex = Vertex(data: data, id: lastId)
-        if adjacencyDict[vertex] == nil {
-            adjacencyDict[vertex] = []
-        }
-        return vertex
+    public func createVertex(data: T) -> Vertex {
+        return self.graphRepresentation.createVertex(data: data)
     }
 
     public func addDirectedEdge(from source: Vertex, to destination: Vertex, weight: Double? = nil) {
-        let edge = Edge(source: source, destination: destination, type: .directed, weight: weight)
-        adjacencyDict[source]?.append(edge)
+        self.graphRepresentation.addDirectedEdge(from: source, to: destination, weight: weight)
     }
 
     public func addUndirectedEdge(vertices: (Vertex, Vertex), weight: Double? = nil) {
-        let (source, destination) = vertices
-        let edge = Edge(source: source, destination: destination, type: .undirected, weight: weight)
-        adjacencyDict[source]?.append(edge)
-        adjacencyDict[destination]?.append(edge)
+        self.graphRepresentation.addUndirectedEdge(vertices: vertices, weight: weight)
     }
 
     public func add(_ type: Edge.EdgeType, from source: Vertex, to destination: Vertex, weight: Double? = nil) {
@@ -103,10 +101,7 @@ public class Graph<T: Hashable> {
     }
 
     public func weight(from source: Vertex, to destination: Vertex) -> Double? {
-        guard let edges = adjacencyDict[source] else {
-            return nil
-        }
-        for edge in edges {
+        for edge in self.edges(from: source) {
             if edge.destination == destination {
                 return edge.weight
             }
@@ -115,7 +110,7 @@ public class Graph<T: Hashable> {
     }
 
     public func edges(from source: Vertex) -> [Edge] {
-        return adjacencyDict[source] ?? []
+        return self.graphRepresentation.edges(from: source)
     }
 
     public func edges(to destination: Vertex) -> [Edge] {
@@ -133,7 +128,7 @@ public class Graph<T: Hashable> {
     }
 
     public func vertices() -> [Vertex] {
-        return Array(adjacencyDict.keys)
+        return self.graphRepresentation.vertices()
     }
 
     public func neighbors(of vertex: Vertex, directedOnly: Bool = false) -> [Vertex] {
@@ -153,6 +148,10 @@ public class Graph<T: Hashable> {
             }
         }
         return Array(result)
+    }
+
+    public func removeVertex(_ vertex: Vertex) {
+        self.graphRepresentation.removeVertex(vertex)
     }
 
 }

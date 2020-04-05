@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E01625B242D73C6009ED874 /* AdjacencyMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E01625A242D73C6009ED874 /* AdjacencyMatrix.swift */; };
 		9E6D404F2425961B00D35FF1 /* AlgorithmsAndDataStructures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6D40452425961B00D35FF1 /* AlgorithmsAndDataStructures.framework */; };
 		9E6D40562425961B00D35FF1 /* AlgorithmsAndDataStructures.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E6D40482425961B00D35FF1 /* AlgorithmsAndDataStructures.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9E6D408E2425966000D35FF1 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6D40602425966000D35FF1 /* Queue.swift */; };
@@ -25,6 +26,8 @@
 		9E6D40A92425967B00D35FF1 /* GraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6D40A62425967B00D35FF1 /* GraphTests.swift */; };
 		9E6D40AA2425967B00D35FF1 /* FiniteStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6D40A72425967B00D35FF1 /* FiniteStateMachineTests.swift */; };
 		9E6D40AB2425967B00D35FF1 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6D40A82425967B00D35FF1 /* LinkedListTests.swift */; };
+		9E97B937242D62BF000B9C29 /* AdjacencyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E97B936242D62BF000B9C29 /* AdjacencyList.swift */; };
+		9EB185102430E83600936118 /* GraphRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB1850F2430E83600936118 /* GraphRepresentation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E01625A242D73C6009ED874 /* AdjacencyMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjacencyMatrix.swift; sourceTree = "<group>"; };
 		9E6D40452425961B00D35FF1 /* AlgorithmsAndDataStructures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlgorithmsAndDataStructures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6D40482425961B00D35FF1 /* AlgorithmsAndDataStructures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlgorithmsAndDataStructures.h; sourceTree = "<group>"; };
 		9E6D40492425961B00D35FF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 		9E6D40A62425967B00D35FF1 /* GraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphTests.swift; sourceTree = "<group>"; };
 		9E6D40A72425967B00D35FF1 /* FiniteStateMachineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiniteStateMachineTests.swift; sourceTree = "<group>"; };
 		9E6D40A82425967B00D35FF1 /* LinkedListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
+		9E97B936242D62BF000B9C29 /* AdjacencyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjacencyList.swift; sourceTree = "<group>"; };
+		9EB1850F2430E83600936118 /* GraphRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRepresentation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +245,9 @@
 			children = (
 				9E6D408A2425966000D35FF1 /* Graph+Algorithms.swift */,
 				9E6D408B2425966000D35FF1 /* Graph.swift */,
+				9EB1850F2430E83600936118 /* GraphRepresentation.swift */,
+				9E97B936242D62BF000B9C29 /* AdjacencyList.swift */,
+				9E01625A242D73C6009ED874 /* AdjacencyMatrix.swift */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
@@ -364,12 +373,15 @@
 				9E6D40A52425966000D35FF1 /* BinaryHeap.swift in Sources */,
 				9E6D40962425966000D35FF1 /* Stack.swift in Sources */,
 				9E6D40A32425966000D35FF1 /* Graph+Algorithms.swift in Sources */,
+				9E97B937242D62BF000B9C29 /* AdjacencyList.swift in Sources */,
 				9E6D40932425966000D35FF1 /* HeapSort.swift in Sources */,
 				9E6D40952425966000D35FF1 /* MergeSort.swift in Sources */,
 				9E6D40942425966000D35FF1 /* QuickSort.swift in Sources */,
 				9E6D408E2425966000D35FF1 /* Queue.swift in Sources */,
+				9EB185102430E83600936118 /* GraphRepresentation.swift in Sources */,
 				9E6D40922425966000D35FF1 /* LinkedList.swift in Sources */,
 				9E6D40A22425966000D35FF1 /* FiniteStateMachine.swift in Sources */,
+				9E01625B242D73C6009ED874 /* AdjacencyMatrix.swift in Sources */,
 				9E6D40A42425966000D35FF1 /* Graph.swift in Sources */,
 				9E6D408F2425966000D35FF1 /* InsertionSort.swift in Sources */,
 				9E6D40902425966000D35FF1 /* BubbleSort.swift in Sources */,

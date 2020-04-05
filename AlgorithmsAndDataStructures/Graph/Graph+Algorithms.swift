@@ -58,6 +58,23 @@ extension Graph {
         }
     }
 
+    public func removeUnreachableVertices(from initial: Vertex) {
+        let unreachable = self.unreachableVertices(from: initial)
+        for vertex in unreachable {
+            self.removeVertex(vertex)
+        }
+    }
+
+    public func unreachableVertices(from initial: Vertex) -> [Vertex] {
+        var result: [Vertex] = []
+        for vertex in self.vertices() {
+            if self.path(from: initial, to: vertex) == nil {
+                result.append(vertex)
+            }
+        }
+        return result
+    }
+
     // Private
 
     private func doDFSForConnectedVertices(startingAt initialVertex: inout Vertex,
